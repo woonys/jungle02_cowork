@@ -1,29 +1,25 @@
 import sys
 
 n, c = map(int, sys.stdin.readline().split())
-home_list = []
-
-for i in range(n):
-    home_list.append(int(input()))
-
+home_list = [int(sys.stdin.readline()) for _ in range(n)]
 home_list.sort()
-start, end = min(home_list), max(home_list)
+
+start, end = 1, home_list[-1] - home_list[0]
+result = 0 # 공유기 사이 거리의 최대값
 
 while start <= end:
     mid = (start + end) // 2
-    distance = 0
-    # count=0
-    #if count == c:
-        # break
-    
-    for i in home_list:
-        if i >= mid:
-            distance += i - mid #나오는 값을 최대 거리 값으로 저장해줌
-            # count += 1
-    if c >= (distance // c): #체크해보기
+    count = 1
+    current = home_list[0]
+    for i in range(1,n):
+        if home_list[i] >= current + mid:
+            count += 1
+            current = home_list[i]
+    if count >= c: 
         start = mid + 1
+        result = mid
     else:
         end = mid - 1
         
-print(end)
+print(result)
 
