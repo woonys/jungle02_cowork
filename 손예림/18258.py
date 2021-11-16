@@ -5,10 +5,31 @@ n = int(sys.stdin.readline())
 queue = deque()
 
 for i in range(n):
-    queue.append(i+1)
-    
-while len(queue) > 1: #1장 남을 때 까지 ( [4, 2] 남을 때 까지)
-    queue.popleft() # 맨 앞 버리기 [1, 2, 3, 4, 5] -> [2, 3, 4, 5]
-    queue.append(queue.popleft()) # 맨 앞을 맨 뒤에 넣기 [3, 4, 5, 2]
-    
-print(queue.pop())
+    lst = sys.stdin.readline().split()
+    if len(lst) == 2: #push 2 이면 2를 lst에 삽입함
+        queue.append(int(lst[1])) 
+    else: # push 외 명령어
+        if lst[0] == 'pop':
+            if len(queue) == 0:
+                print(-1)
+            else:
+                a = queue.popleft()
+                print(a)
+        elif lst[0] == 'size':
+            print(len(queue))
+        elif lst[0] == 'empty':
+            if len(queue) == 0:
+                print(1)
+            else:
+                print(0)
+        elif lst[0] =='front':
+            if len(queue) == 0:
+                print(-1)
+            else:
+                print(queue[0])
+        else: 
+            if len(queue) == 0:
+                print(-1)
+            else:
+                print(queue[-1])
+                
