@@ -14,7 +14,7 @@ while start <= end :
     T_cut_sum = 0
     for tree in trees:
         if tree >= mid:
-            T_cut_sum += tree-mid
+            T_cut_sum += tree-mid # 처음에 잘라진 나무길이의 합
     
     if T_cut_sum >= min_bring:
         start = mid + 1
