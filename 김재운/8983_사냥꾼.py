@@ -15,7 +15,6 @@ for i in gun:
         if distance(i, j) <= l:
             count += 1
             print(j)
-            animal.remove(j)
 
 
 print(count)
@@ -27,23 +26,25 @@ from bisect import bisect_left
 
 m, n, l = map(int, stdin.readline().split())
 gun = list(map(int, stdin.readline().split()))
-animal = [list(map(int, stdin.readline().split())) for _ in range(n)]
+# animal = [list(map(int, stdin.readline().split())) for _ in range(n)]
 
 gun.sort()  # 사대 정렬하고
-# 무조건 l-animal[i][1]만큼 까야겠네. 그게 사대 거리 (x 값끼리만 비교 가능)
+# l-animal[i][1]만큼 까야겠네. 그게 사대 거리 (x 값끼리만 비교 가능)
 
 
 count = 0
-for i in animal[:]:
-    start = 0  # 사대의 가장 왼쪽 위치
-    end = m - 1
-    while (start < end):
-        mid = (start + end) // 2
-        if gun[mid] < i[0]:
-            start = mid + 1
+for i in range(n):
+    x, y = map(int, stdin.readline().split())
+    if not y > l:
+        if x <=gun[0]:
+            if gun[0]-x + y <=l:
+                count +=1
+        elif x >= gun[-1]:
+            if x-gun[-1] + y <=l:
+                count +=1
         else:
-            end = mid
-    if (abs(i[0] - gun[end - 1])+i[1]) > l  and (abs(gun[end] - i[0])+i[1]) <= l:
-        count += 1
+            idx = bisect_left(gun, x)
+            if (abs(x - gun[idx - 1])+y) <= l or (abs(gun[idx] - x)+y) <= l:
+                count += 1
 
 print(count)
