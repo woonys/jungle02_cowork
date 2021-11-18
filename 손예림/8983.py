@@ -15,6 +15,7 @@ for i in animal[:]:
             start = mid + 1
         else:
             end = mid
+    #사정거리 안에 들어오는지
     if (abs(i[0] - gun[end - 1])+i[1]) > 1 and (abs(gun[end] - i[0])+i[1]) <= l:
         count += 1
         

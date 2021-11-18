@@ -2,20 +2,20 @@ import sys
 
 n = int(sys.stdin.readline())
 a = [list(map(int, sys.stdin.readline().split())) for i in range(n)]
-_a = a[::-1]
 
-# print(_a)
-high = []
-# count = 0
+count = 0
+val = 0
+
 for i in range(n):
-    if i >= :
-        high.append(i)
-    elif i >= high[i-1]:
-        high.append(i)
-        # count += 1
-    # else :
-        # i < high
-        # high.pop()
-        
-print(len(high))
+    if count == 0:
+        count += 1
+        val = a.pop()
+    else:
+        if a[-1] <= val:
+            a.pop()
+        else:
+            a[-1] > val
+            count += 1
+            val = a.pop()
 
+print(count)
